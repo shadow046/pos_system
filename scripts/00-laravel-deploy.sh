@@ -19,6 +19,3 @@ php artisan migrate --force
 echo "Running npm..."
 npm install
 npm run build
-
-echo "Link Storage..."
-php artisan storage:link --force

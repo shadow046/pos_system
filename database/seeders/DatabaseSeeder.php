@@ -17,16 +17,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // Role::create(['name' => 'admin', 'guard_name' => 'web']);
-
-        // $user = \App\Models\User::factory()->create([
-        //     'email' => 'admin@gmail.com',
-        //     'password' => Hash::make('secret'),
-        //     'status' => 'active'
-        // ]);
-
-        // \App\Models\Profile::create(['first_name' => 'Default', 'last_name' => 'Admin', 'user_id' => $user->id]);
-
-        // $user->assignRole('admin');
+        // 
     }
 }
