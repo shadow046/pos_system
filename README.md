@@ -71,4 +71,4 @@ php artisan db:seed
 
 Always rebase the current branch to the main branch before pusing to the origin.
 
-There are two roles implemented on the current system, <b>owner and cashier</b>
+There are two roles implemented on the current system, <b>admin and cashier</b>
