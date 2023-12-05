@@ -11,7 +11,6 @@ class AuthenticationObserver
     // Login user
     public function login(User $user): void
     {
-        \Log::info($user);
         GenerateActivityLog::run('Login', $user, 'Login using '. Browser::browserFamily().' on '. Browser::platformFamily());
     }
 
