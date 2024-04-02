@@ -11,8 +11,6 @@ class SetDateTo
 
     /**
      * Set date from.
-     * 
-     * @param ReportRequest $request
      */
     public function handle(ReportRequest $request)
     {

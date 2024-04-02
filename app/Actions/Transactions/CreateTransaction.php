@@ -14,17 +14,16 @@ class CreateTransaction
 
     /**
      * Create transaction.
-     * 
-     * @param Transaction $transaction
-     * @return Transaction
+     *
+     * @param  Transaction  $transaction
      */
     public function handle(TransactionRequest $request): Transaction
     {
         $latest_transaction = Transaction::latest('id')->first();
 
         $receipt_number = filled($latest_transaction)
-        ? str_pad($latest_transaction->id + 1, 8, "0", STR_PAD_LEFT)
-        : str_pad(1, 8, "0", STR_PAD_LEFT);
+        ? str_pad($latest_transaction->id + 1, 8, '0', STR_PAD_LEFT)
+        : str_pad(1, 8, '0', STR_PAD_LEFT);
 
         $transaction = $this->create($request, $receipt_number);
 
@@ -48,14 +47,14 @@ class CreateTransaction
             'amount' => $request->amount,
             'amount_paid' => $request->cash,
             'change' => $request->change,
-            'status' => 'pending'
+            'status' => 'pending',
         ]);
     }
 
     // Store order details.
     protected function storeDetails(TransactionRequest $request, Transaction $transaction): void
     {
-        foreach($request->items as $item)
+        foreach ($request->items as $item)
         {
             Order::create([
                 'transaction_id' => $transaction->id,
@@ -72,10 +71,10 @@ class CreateTransaction
     protected function consumeStock(array $item)
     {
         $product = Product::find($item['id']);
-        if(filled($product))
+        if (filled($product))
         {
             $product->update([
-                'quantity' => $product->quantity - $item['quantity']
+                'quantity' => $product->quantity - $item['quantity'],
             ]);
 
             $product->update(['status' => $product->fresh()->quantity <= 0 ? 'not available' : 'available']);

@@ -10,7 +10,8 @@ trait UsesUuid
     protected static function bootUsesUuid()
     {
         static::creating(function ($model) {
-            if (! $model->getKey()) {
+            if (! $model->getKey())
+            {
                 $model->uuid = (string) Str::uuid();
             }
         });
@@ -19,7 +20,6 @@ trait UsesUuid
     /**
      * Prepare a date for array / JSON serialization.
      *
-     * @param  \DateTimeInterface  $date
      * @return string
      */
     protected function serializeDate(\DateTimeInterface $date)
@@ -29,8 +29,6 @@ trait UsesUuid
 
     /**
      * Interact with the model's type.
-     *
-     * @return  \Illuminate\Database\Eloquent\Casts\Attribute
      */
     public function modelType(): Attribute
     {
@@ -41,8 +39,6 @@ trait UsesUuid
 
     /**
      * Interact with the model's morph class.
-     *
-     * @return  \Illuminate\Database\Eloquent\Casts\Attribute
      */
     public function modelMorphClass(): Attribute
     {

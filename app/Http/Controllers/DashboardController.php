@@ -10,10 +10,8 @@ class DashboardController extends Controller
 {
     /**
      * Dashboard.
-     * 
-     * @return Response
      */
-    public function index() : Response
+    public function index(): Response
     {
         return Inertia::render('Dashboard', [
             'user' => auth()->user(),

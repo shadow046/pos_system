@@ -12,13 +12,10 @@ class RemovePhoto
 
     /**
      * Remove photo from storage.
-     * 
-     * @param Product $product
-     * @return void
      */
-    public function handle(Product $product) : void
+    public function handle(Product $product): void
     {
-        if(filled($product->image) && Storage::disk()->exists($product->image))
+        if (filled($product->image) && Storage::disk()->exists($product->image))
         {
             Storage::disk()->delete($product->image);
         }

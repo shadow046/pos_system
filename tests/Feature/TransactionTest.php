@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Role;
 use App\Models\Transaction;
@@ -38,7 +39,7 @@ it('can create transaction', function () {
     $data = [
         'discount' => 0,
         'cash' => 500,
-        'change' => 500 - (3*$product->price),
+        'change' => 500 - (3 * $product->price),
         'order_type' => 'dine in',
         'items' => [
             [
@@ -46,12 +47,12 @@ it('can create transaction', function () {
                 'name' => $product->name,
                 'price' => $product->price,
                 'sub_total' => 3 * $product->price,
-                'quantity' => 3
+                'quantity' => 3,
             ],
         ],
-        'amount' => 3*$product->price,
-        'sales' => round((3*$product->price) - ((3*$product->price / 1.12) * 0.12), 2),
-        'vat' => round(((3*$product->price) / 1.12) * 0.12, 2),
+        'amount' => 3 * $product->price,
+        'sales' => round((3 * $product->price) - ((3 * $product->price / 1.12) * 0.12), 2),
+        'vat' => round(((3 * $product->price) / 1.12) * 0.12, 2),
         'total_order' => 3,
     ];
 
@@ -74,7 +75,7 @@ it('can update transaction status to void, and it will remove generated receipt'
     $data = [
         'discount' => 0,
         'cash' => 500,
-        'change' => 500 - (3*$product->price),
+        'change' => 500 - (3 * $product->price),
         'order_type' => 'dine in',
         'items' => [
             [
@@ -82,12 +83,12 @@ it('can update transaction status to void, and it will remove generated receipt'
                 'name' => $product->name,
                 'price' => $product->price,
                 'sub_total' => 3 * $product->price,
-                'quantity' => 3
+                'quantity' => 3,
             ],
         ],
-        'amount' => 3*$product->price,
-        'sales' => round((3*$product->price) - ((3*$product->price / 1.12) * 0.12), 2),
-        'vat' => round(((3*$product->price) / 1.12) * 0.12, 2),
+        'amount' => 3 * $product->price,
+        'sales' => round((3 * $product->price) - ((3 * $product->price / 1.12) * 0.12), 2),
+        'vat' => round(((3 * $product->price) / 1.12) * 0.12, 2),
         'total_order' => 3,
     ];
 
@@ -104,4 +105,38 @@ it('can update transaction status to void, and it will remove generated receipt'
     assertNotEquals('pending', $transaction->fresh()->status);
     assertEquals('void', $transaction->fresh()->status);
     Storage::disk()->assertMissing("Transactions/{$transaction->id}/{$transaction->receipt_no}.pdf");
+});
+
+it('can load transactions from api', function ($value) {
+    Role::factory()->admin()->create();
+    $user = User::factory()->admin();
+
+    $product = Product::factory()->create(['status' => 'available']);
+    $transaction = Transaction::factory()->create(['user_id' => $user->id, 'status' => $value]);
+    Order::factory()->create(['transaction_id' => $transaction->id, 'product_id' => $product->id]);
+
+    actingAs($user)
+        ->json('GET', route("api.transactions.{$value}"))
+        ->assertOk();
+})->with([
+    ['pending'],
+    ['serving'],
+    ['completed'],
+    ['preparing'],
+    ['void'],
+]);
+
+it('can update transactions from api', function () {
+    Role::factory()->admin()->create();
+    $user = User::factory()->admin();
+
+    $product = Product::factory()->create(['status' => 'available']);
+    $transaction = Transaction::factory()->create(['user_id' => $user->id]);
+    Order::factory()->create(['transaction_id' => $transaction->id, 'product_id' => $product->id]);
+
+    actingAs($user)
+        ->json('PUT', route('api.transactions.change-status', $transaction->uuid), ['status' => 'preparing'])
+        ->assertStatus(201);
+
+    assertEquals('preparing', $transaction->fresh()->status);
 });

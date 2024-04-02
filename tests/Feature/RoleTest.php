@@ -15,13 +15,13 @@ it('validates required the data', function ($key, $value) {
         ->post(route('roles.store'), Role::factory()->make([$key => $value])->toArray())
         ->assertSessionHasErrors($key);
 })->with([
-    ['name', '']
+    ['name', ''],
 ]);
 
 it('can create role', function () {
     Role::factory()->admin()->create();
     $user = User::factory()->admin();
-    
+
     $role = Role::factory()->make()->toArray();
 
     actingAs($user)
@@ -37,7 +37,7 @@ it('can update role', function () {
 
     $role = Role::factory()->create();
     $edited = Role::factory()->make()->toArray();
-        
+
     actingAs($user)
         ->put(route('roles.update', $role->id), $edited)
         ->assertRedirect(route('roles.index'));
@@ -55,6 +55,6 @@ it('can delete role', function () {
     actingAs($user)
         ->delete(route('roles.delete', $role->id))
         ->assertStatus(201);
-        
+
     assertDatabaseMissing('roles', $role->toArray());
 });

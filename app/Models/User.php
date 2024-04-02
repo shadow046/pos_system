@@ -16,9 +16,7 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
     use HasRoles;
-    
     use UsesUuid;
 
     /**
@@ -34,7 +32,7 @@ class User extends Authenticatable
         'password',
         'current_ip_address',
         'has_changed_password',
-        'status'
+        'status',
     ];
 
     /**
@@ -56,35 +54,29 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'deactivated_at' => 'datetime',
         'otp_expired_at' => 'datetime',
-        'device_verified_at' => 'datetime'
+        'device_verified_at' => 'datetime',
     ];
 
     /**
      * User relationship with profile.
-     *
-     * @return HasOne
      */
-    public function profile() : HasOne
+    public function profile(): HasOne
     {
         return $this->hasOne(Profile::class);
     }
 
     /**
      * Check if user is active.
-     * 
-     * @return bool
      */
-    public function isActive() : bool
+    public function isActive(): bool
     {
         return $this->status === 'active';
     }
 
     /**
      * Interact with the user's email.
-     *
-     * @return Attribute
      */
-    public function maskedEmail() : Attribute
+    public function maskedEmail(): Attribute
     {
         return Attribute::make(
             get: fn ($value, $attributes) => $this->processMasking($attributes['email']),
@@ -94,17 +86,15 @@ class User extends Authenticatable
     // Process masking email.
     protected function processMasking(string $email): string
     {
-        $domain   = explode("@", $email);
-        $name = implode('@', array_slice($domain, 0, count($domain)-1));
-        $len  = floor(strlen($name)/2);
+        $domain = explode('@', $email);
+        $name = implode('@', array_slice($domain, 0, count($domain) - 1));
+        $len = floor(strlen($name) / 2);
 
-        return substr($name,0, 1) . str_repeat('*', $len) . "@" . end($domain);
+        return substr($name, 0, 1).str_repeat('*', $len).'@'.end($domain);
     }
 
     /**
      * Check if user is admin.
-     * 
-     * @return bool
      */
     public function isAdmin(): bool
     {
@@ -113,8 +103,6 @@ class User extends Authenticatable
 
     /**
      * Check if user is cashier.
-     * 
-     * @return bool
      */
     public function isCashier(): bool
     {

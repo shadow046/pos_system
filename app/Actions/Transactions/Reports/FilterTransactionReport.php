@@ -11,8 +11,6 @@ class FilterTransactionReport
 
     /**
      * Filter transaction report.
-     * 
-     * @param ReportRequest $request
      */
     public function handle(ReportRequest $request)
     {
@@ -21,7 +19,7 @@ class FilterTransactionReport
             'completed' => GetCompletedTransaction::run($request),
             'void' => GetVoidTransaction::run($request),
             'total' => GetTotalTransaction::run($request),
-            'sales' => GetSalesTransaction::run($request)
+            'sales' => GetSalesTransaction::run($request),
         ];
     }
 }

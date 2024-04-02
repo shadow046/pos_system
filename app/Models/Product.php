@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Storage;
 class Product extends Model
 {
     use HasFactory;
-    
     use UsesUuid;
 
     /**
@@ -27,7 +26,7 @@ class Product extends Model
         'price',
         'quantity',
         'image',
-        'status'
+        'status',
     ];
 
     /**
@@ -37,10 +36,8 @@ class Product extends Model
 
     /**
      * Pivot relationship with category.
-     * 
-     * @return BelongsToMany
      */
-    public function categories() : BelongsToMany
+    public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class,
             'product_categories',
@@ -51,10 +48,8 @@ class Product extends Model
 
     /**
      * Interact with the product's photo.
-     *
-     * @return Attribute
      */
-    public function photo() : Attribute
+    public function photo(): Attribute
     {
         return Attribute::make(
             get: fn () => Storage::disk()->url($this->attributes['image']),

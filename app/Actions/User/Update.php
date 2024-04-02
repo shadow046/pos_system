@@ -12,12 +12,10 @@ class Update
 
     /**
      * Create user.
-     * 
-     * @param User $request
-     * @param UserRequest $request
-     * @return void
+     *
+     * @param  User  $request
      */
-    public function handle(User $user, UserRequest $request) : void
+    public function handle(User $user, UserRequest $request): void
     {
         $user->update([
             'email' => $request->email,

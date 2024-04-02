@@ -20,7 +20,7 @@ class UserObserver
      */
     public function updated(User $user): void
     {
-        if(!$user->wasChanged('remember_token'))
+        if (! $user->wasChanged('remember_token'))
         {
             GenerateActivityLog::run('Updated', $user, "Edited {$user->email} account credentials");
         }

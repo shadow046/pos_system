@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Transactions\ChangeTransactionStatus;
 use App\Actions\Transactions\CreateTransaction;
 use App\Actions\Transactions\GenerateReceipt;
 use App\Http\Requests\Store\TransactionRequest;
@@ -44,7 +45,7 @@ class TransactionController extends Controller
     // Generate transaction receipt.
     public function generateReceipt(Transaction $transaction): JsonResponse
     {
-        if(filled($transaction->receipt))
+        if (filled($transaction->receipt))
         {
             Storage::disk()->delete($transaction->receipt->path);
             $transaction->receipt()->delete();
@@ -53,40 +54,15 @@ class TransactionController extends Controller
         GenerateReceipt::run($transaction);
 
         return response()->json([
-            'message' => 'Receipt has been created!'
+            'message' => 'Receipt has been created!',
         ], 201);
     }
 
     // Update transaction status.
     public function update(Transaction $transaction, UpdateTransactionRequest $request): RedirectResponse
     {
-        $transaction->update(['status' => $request->status]);
-
-        if($request->status === 'void' && $this->hasReceipt($transaction))
-        {
-            Storage::disk()->delete($transaction->receipt->path);
-
-            $transaction->receipt->delete();
-
-            foreach($transaction->orders as $order)
-            {
-                if(filled($order->product))
-                {
-                    $order->product->update([
-                        'quantity' => $order->product->quantity + $order->quantity
-                    ]);
-
-                    $order->product->update(['status' => $order->product->fresh()->quantity <= 0 ? 'not available' : 'available']);
-                }
-            }
-        }
+        ChangeTransactionStatus::run($request, $transaction);
 
         return back();
-    }
-
-    // Check if transaction has generated receipt.
-    protected function hasReceipt(Transaction $transaction): bool
-    {
-        return filled($transaction->receipt) && Storage::disk()->exists($transaction->receipt->path);
     }
 }

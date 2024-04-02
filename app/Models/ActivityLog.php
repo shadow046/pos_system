@@ -21,7 +21,7 @@ class ActivityLog extends Model
         'typeable_type',
         'description',
         'device',
-        'user_id'
+        'user_id',
     ];
 
     // Scope a query to only include activity logs per user.

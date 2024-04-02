@@ -12,8 +12,6 @@ class GetSalesTransaction
 
     /**
      * Sales transaction report.
-     * 
-     * @param ReportRequest $request
      */
     public function handle(ReportRequest $request)
     {
@@ -24,7 +22,7 @@ class GetSalesTransaction
             ->betweenDate("{$startDate} 00:00:00", "{$endDate} 23:59:59");
 
         return [
-            'gross_sales' => round($transaction->sum('amount') + $transaction->sum('discount'),2),
+            'gross_sales' => round($transaction->sum('amount') + $transaction->sum('discount'), 2),
             'net_sales' => round($transaction->sum('sales') - $transaction->sum('discount'), 2),
             'tax_sales' => (float) $transaction->sum('vat'),
             'discount_sales' => (float) $transaction->sum('discount'),

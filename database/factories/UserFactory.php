@@ -44,14 +44,14 @@ class UserFactory extends Factory
 
     /**
      * Profile state
-     * 
+     *
      * @return static
      */
     public function profile()
     {
         return $this->state(fn (array $attributes) => [
             'first_name' => fake()->firstName(),
-            'last_name' => fake()->lastName()
+            'last_name' => fake()->lastName(),
         ]);
     }
 
@@ -59,7 +59,7 @@ class UserFactory extends Factory
     public function admin()
     {
         $user = $this->create();
-        
+
         $user->assignRole('admin');
 
         return $user;

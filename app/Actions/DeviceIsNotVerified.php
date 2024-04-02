@@ -10,8 +10,6 @@ class DeviceIsNotVerified
 
     /**
      * Check if device is not verified
-     * 
-     * @return bool
      */
     public function handle(): bool
     {

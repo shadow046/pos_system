@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Category extends Model
 {
     use HasFactory;
-    
     use UsesUuid;
 
     /**
@@ -19,15 +18,13 @@ class Category extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name'
+        'name',
     ];
 
     /**
      * Pivot relationship with product.
-     * 
-     * @return BelongsToMany
      */
-    public function products() : BelongsToMany
+    public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class,
             'product_categories',

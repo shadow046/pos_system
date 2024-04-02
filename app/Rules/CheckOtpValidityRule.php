@@ -16,7 +16,7 @@ class CheckOtpValidityRule implements ValidationRule
      */
     public function __construct(protected User $user)
     {
-        // 
+        //
     }
 
     /**
@@ -26,12 +26,12 @@ class CheckOtpValidityRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if($this->notValidOtp($value))
+        if ($this->notValidOtp($value))
         {
             $fail('Verification code is not valid.');
         }
 
-        if($this->otpExpired($value))
+        if ($this->otpExpired($value))
         {
             $fail('The verification code has expired. Please send again.');
         }

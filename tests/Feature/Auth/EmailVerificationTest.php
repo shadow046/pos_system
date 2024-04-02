@@ -14,8 +14,8 @@ it('can render email verification page', function () {
     ]);
 
     actingAs($user)
-    ->get('/verify-email')
-    ->assertOk();
+        ->get('/verify-email')
+        ->assertOk();
 });
 
 it('can verify email', function () {
