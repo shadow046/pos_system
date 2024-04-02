@@ -22,7 +22,7 @@ class ProductFactory extends Factory
             'price' => 100.00,
             'quantity' => 0,
             'status' => 'not available',
-            'image' => null
+            'image' => null,
         ];
     }
 }

@@ -17,14 +17,14 @@ class CheckProductAvailabilityRule implements ValidationRule
     {
         $product = Product::find($value['id']);
 
-        if(!$this->hasEnoughStock($product, $value))
+        if (! $this->hasEnoughStock($product, $value))
         {
             $fail('This product does not have sufficient stock.');
         }
     }
 
     // Check if product exist and has sufficient quantity.
-    protected function hasEnoughStock(Product $product, array $value) : bool
+    protected function hasEnoughStock(Product $product, array $value): bool
     {
         return filled($product) &&
             $product->quantity != 0 &&

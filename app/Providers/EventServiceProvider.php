@@ -65,7 +65,7 @@ class EventServiceProvider extends ServiceProvider
         Event::listen(\Illuminate\Auth\Events\Login::class, function ($event) {
             (new AuthenticationObserver)->login($event->user);
         });
-        
+
         Event::listen(\Illuminate\Auth\Events\Logout::class, function ($event) {
             filled($event->user)
             ? (new AuthenticationObserver)->logout($event->user)

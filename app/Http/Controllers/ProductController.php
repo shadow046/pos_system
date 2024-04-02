@@ -12,7 +12,6 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -20,24 +19,19 @@ class ProductController extends Controller
 {
     /**
      * Display products.
-     * 
-     * @return Response
      */
-    public function index() : Response
+    public function index(): Response
     {
         return Inertia::render('Products/Index', [
             'products' => Product::with('categories')->latest('id')->simplePaginate(10),
-            'categories' => CategoryResource::collection(Category::all())
+            'categories' => CategoryResource::collection(Category::all()),
         ]);
     }
 
     /**
      * Create product.
-     * 
-     * @param ProductRequest $request
-     * @return RedirectResponse
      */
-    public function store(ProductRequest $request) : RedirectResponse
+    public function store(ProductRequest $request): RedirectResponse
     {
         Create::run($request);
 
@@ -46,12 +40,8 @@ class ProductController extends Controller
 
     /**
      * Update product.
-     * 
-     * @param Product $product
-     * @param UpdateProductRequest $request
-     * @return RedirectResponse
      */
-    public function update(Product $product, UpdateProductRequest $request) : RedirectResponse
+    public function update(Product $product, UpdateProductRequest $request): RedirectResponse
     {
         Update::run($product, $request);
 
@@ -60,18 +50,15 @@ class ProductController extends Controller
 
     /**
      * Delete product.
-     * 
-     * @param Product $product
-     * @return JsonResponse
      */
-    public function destroy(Product $product) : JsonResponse
+    public function destroy(Product $product): JsonResponse
     {
         RemovePhoto::run($product);
-        
+
         $product->delete();
 
         return response()->json([
-            'message' => 'Product has been removed.'
+            'message' => 'Product has been removed.',
         ], 201);
     }
 }

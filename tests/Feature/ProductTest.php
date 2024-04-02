@@ -19,20 +19,20 @@ it('validates required the data', function ($key, $value) {
 })->with([
     ['name', ''],
     ['price', ''],
-    ['quantity', '']
+    ['quantity', ''],
 ]);
 
 it('can create product', function () {
     Storage::fake();
     Role::factory()->admin()->create();
     $user = User::factory()->admin();
-    
+
     $product = Product::factory()->make()->toArray();
 
     actingAs($user)
         ->post(route('products.store'), $product)
         ->assertRedirect(route('products.index'));
-        
+
     unset($product['photo']);
 
     assertDatabaseHas('products', $product);
@@ -45,7 +45,7 @@ it('can update product', function () {
 
     $product = Product::factory()->create();
     $edited = Product::factory()->make()->toArray();
-        
+
     actingAs($user)
         ->post(route('products.update', $product->uuid), $edited)
         ->assertRedirect(route('products.index'));
@@ -71,14 +71,14 @@ it('can delete product', function () {
 
     $product = $product->toArray();
     unset($product['photo']);
-        
+
     assertDatabaseMissing('products', $product);
 });
 
 it('can fetch product from api', function () {
     Role::factory()->admin()->create();
     $user = User::factory()->admin();
-    
+
     Product::factory()->create(['status' => 'available']);
 
     actingAs($user)

@@ -16,13 +16,13 @@ it('validates required the data', function ($key, $value) {
         ->post(route('categories.store'), Category::factory()->make([$key => $value])->toArray())
         ->assertSessionHasErrors($key);
 })->with([
-    ['name', '']
+    ['name', ''],
 ]);
 
 it('can create category', function () {
     Role::factory()->admin()->create();
     $user = User::factory()->admin();
-    
+
     $category = Category::factory()->make()->toArray();
 
     actingAs($user)
@@ -38,7 +38,7 @@ it('can update category', function () {
 
     $category = Category::factory()->create();
     $edited = Category::factory()->make()->toArray();
-        
+
     actingAs($user)
         ->put(route('categories.update', $category->uuid), $edited)
         ->assertRedirect(route('categories.index'));
@@ -56,6 +56,6 @@ it('can delete category', function () {
     actingAs($user)
         ->delete(route('categories.delete', $category->uuid))
         ->assertStatus(201);
-        
+
     assertDatabaseMissing('categories', $category->toArray());
 });

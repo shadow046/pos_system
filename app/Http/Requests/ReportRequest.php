@@ -23,7 +23,7 @@ class ReportRequest extends FormRequest
     {
         return [
             'from' => 'nullable|date',
-            'to' => 'nullable|date'
+            'to' => 'nullable|date',
         ];
     }
 }

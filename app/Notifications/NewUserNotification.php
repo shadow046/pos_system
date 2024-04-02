@@ -26,12 +26,12 @@ class NewUserNotification extends Notification implements ShouldQueue
     {
         //
     }
-    
+
     public function handle(NewUserEvent $event)
     {
         $this->password = $event->password;
         $this->user = $event->user;
-        
+
         app(Dispatcher::class)->sendNow($event->user, $this);
     }
 

@@ -18,13 +18,13 @@ class RoleFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'guard_name' => 'web'
+            'guard_name' => 'web',
         ];
     }
 
     /**
      * Admin role state
-     * 
+     *
      * @return static
      */
     public function admin()
@@ -36,7 +36,7 @@ class RoleFactory extends Factory
 
     /**
      * Cashier role state
-     * 
+     *
      * @return static
      */
     public function cashier()

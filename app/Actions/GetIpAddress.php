@@ -10,8 +10,6 @@ class GetIpAddress
 
     /**
      * Get ip address
-     * 
-     * @return string
      */
     public function handle(): string
     {

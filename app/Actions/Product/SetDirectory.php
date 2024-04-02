@@ -11,11 +11,8 @@ class SetDirectory
 
     /**
      * Set directory.
-     * 
-     * @param Product $product
-     * @return string
      */
-    public function handle(Product $product) : string
+    public function handle(Product $product): string
     {
         return "Products/{$product->id}/Images";
     }

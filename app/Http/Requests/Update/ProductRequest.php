@@ -27,7 +27,7 @@ class ProductRequest extends FormRequest
             'name' => 'required',
             'price' => 'required|numeric',
             'quantity' => 'required|numeric',
-            'image' => filled($this->request->get('image')) ? 'image|mimes:jpg,jpeg,png|max:10000' : ''
+            'image' => filled($this->request->get('image')) ? 'image|mimes:jpg,jpeg,png|max:10000' : '',
         ];
     }
 }

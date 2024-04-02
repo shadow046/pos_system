@@ -31,7 +31,7 @@ it('can create user', function () {
     $user = User::factory()->admin();
 
     $role = Role::factory()->cashier()->create();
-    
+
     $data = User::factory()->profile()->make()->toArray();
     $data['role'] = $role->name;
 
@@ -51,7 +51,7 @@ it('can update user', function () {
     $user = User::factory()->admin();
 
     $role = Role::factory()->cashier()->create();
-    
+
     $new_user = User::factory()->create();
     Profile::factory()->create(['user_id' => $new_user->id]);
 
@@ -62,7 +62,7 @@ it('can update user', function () {
         'last_name' => fake()->lastName(),
         'email' => $new_user->email,
         'role' => $new_user->roles[0]->name,
-        'status' => 'inactive'
+        'status' => 'inactive',
     ];
 
     actingAs($user)
@@ -78,7 +78,7 @@ it('can resend user credentials', function () {
     $user = User::factory()->admin();
 
     $role = Role::factory()->cashier()->create();
-    
+
     $new_user = User::factory()->create();
     Profile::factory()->create(['user_id' => $new_user->id]);
 

@@ -32,7 +32,7 @@ class TransactionRequest extends FormRequest
             'cash' => 'required|numeric|gte:amount',
             'change' => 'required|numeric',
             'items' => 'required',
-            'items.*' => ['required', new CheckProductAvailabilityRule()],
+            'items.*' => ['required', new CheckProductAvailabilityRule],
             'items.*.quantity' => 'required|gt:0|integer',
         ];
     }

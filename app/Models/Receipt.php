@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Storage;
 class Receipt extends Model
 {
     use HasFactory;
-
     use UsesUuid;
 
     /**
@@ -23,7 +22,7 @@ class Receipt extends Model
     protected $fillable = [
         'transaction_id',
         'path',
-        'file_name'
+        'file_name',
     ];
 
     /**
@@ -33,8 +32,6 @@ class Receipt extends Model
 
     /**
      * Receipt relationship with transaction.
-     * 
-     * @return BelongsTo
      */
     public function transaction(): BelongsTo
     {
@@ -43,10 +40,8 @@ class Receipt extends Model
 
     /**
      * Interact with the receipt's file path.
-     *
-     * @return Attribute
      */
-    public function file() : Attribute
+    public function file(): Attribute
     {
         return Attribute::make(
             get: fn () => Storage::disk()->url($this->attributes['path']),

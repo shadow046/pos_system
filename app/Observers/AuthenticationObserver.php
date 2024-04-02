@@ -11,12 +11,12 @@ class AuthenticationObserver
     // Login user
     public function login(User $user): void
     {
-        GenerateActivityLog::run('Login', $user, 'Login using '. Browser::browserFamily().' on '. Browser::platformFamily());
+        GenerateActivityLog::run('Login', $user, 'Login using '.Browser::browserFamily().' on '.Browser::platformFamily());
     }
 
     // Logout user
     public function logout(User $user): void
-    { 
-        GenerateActivityLog::run('Logout', $user, 'Logout from '. Browser::browserFamily().' on '. Browser::platformFamily());
+    {
+        GenerateActivityLog::run('Logout', $user, 'Logout from '.Browser::browserFamily().' on '.Browser::platformFamily());
     }
 }

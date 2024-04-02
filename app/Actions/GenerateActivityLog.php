@@ -12,7 +12,7 @@ class GenerateActivityLog
 
     protected $activity;
 
-    public function handle(string $action, Model $model, string $description = null) : ActivityLog
+    public function handle(string $action, Model $model, string $description = null): ActivityLog
     {
         return ActivityLog::create([
             'action' => $action,
@@ -20,7 +20,7 @@ class GenerateActivityLog
             'typeable_type' => $model->getMorphClass(),
             'description' => $description,
             'device' => json_encode(['ip_address' => GetIpAddress::run(), 'user_agent' => request()->header('User-Agent')]),
-            'user_id' => auth()->check() ? auth()->user()->id : null
+            'user_id' => auth()->check() ? auth()->user()->id : null,
         ]);
     }
 }

@@ -16,11 +16,8 @@ class Create
 
     /**
      * Create user.
-     * 
-     * @param UserRequest $request
-     * @return void
      */
-    public function handle(UserRequest $request) : void
+    public function handle(UserRequest $request): void
     {
         $password = Str::random(8);
 
@@ -35,13 +32,8 @@ class Create
 
     /**
      * Create user.
-     * 
-     * @param UserRequest $request
-     * @param string $password
-     * 
-     * @return User
      */
-    protected function createUser(UserRequest $request, string $password) : User
+    protected function createUser(UserRequest $request, string $password): User
     {
         return User::create([
             'email' => $request->email,
@@ -52,13 +44,8 @@ class Create
 
     /**
      * Create profile.
-     * 
-     * @param UserRequest $request
-     * @param User $user
-     * 
-     * @return void
      */
-    protected function createProfile(UserRequest $request, User $user) : void
+    protected function createProfile(UserRequest $request, User $user): void
     {
         Profile::create([
             'user_id' => $user->id,
