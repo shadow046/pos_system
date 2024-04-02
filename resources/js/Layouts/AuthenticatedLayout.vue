@@ -378,7 +378,7 @@ const showConfigurationsMenu = ref(false);
         </TransitionRoot>
 
         <div class="flex flex-col flex-1 w-full mx-auto">
-            <header class="z-10 py-4 bg-white">
+            <header class="z-10 py-4 bg-white shadow-md">
                 <div
                 class="container flex items-center justify-between h-full px-6 mx-auto text-yellow-400"
                 >
