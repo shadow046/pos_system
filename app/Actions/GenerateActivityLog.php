@@ -12,7 +12,7 @@ class GenerateActivityLog
 
     protected $activity;
 
-    public function handle(string $action, Model $model, string $description = null): ActivityLog
+    public function handle(string $action, Model $model, ?string $description = null): ActivityLog
     {
         return ActivityLog::create([
             'action' => $action,

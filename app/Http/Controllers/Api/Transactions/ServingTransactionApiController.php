@@ -12,6 +12,6 @@ class ServingTransactionApiController extends Controller
     // List of serving transactions
     public function index(): AnonymousResourceCollection
     {
-        return TransactionResource::collection(Transaction::with('orders.product')->status('serving')->get());
+        return TransactionResource::collection(Transaction::with('orders.product')->today()->status('serving')->get());
     }
 }

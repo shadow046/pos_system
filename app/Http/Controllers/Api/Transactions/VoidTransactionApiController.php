@@ -12,6 +12,6 @@ class VoidTransactionApiController extends Controller
     // List of void transactions
     public function index(): AnonymousResourceCollection
     {
-        return TransactionResource::collection(Transaction::with('orders.product')->status('void')->get());
+        return TransactionResource::collection(Transaction::with('orders.product')->today()->status('void')->get());
     }
 }

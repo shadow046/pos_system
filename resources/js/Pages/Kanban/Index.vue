@@ -5,10 +5,9 @@
     import axios from 'axios';
     import { VueDraggableNext } from 'vue-draggable-next';
     import { Head } from '@inertiajs/vue3';
-import moment from 'moment';
+    import moment from 'moment';
 
     const currentTime = ref('');
-    const currentDate = ref('');
 
     const newData = ref({
         columns: {
@@ -88,7 +87,6 @@ import moment from 'moment';
     const updateClock = () => {
         const now = new Date();
         currentTime.value = now.toLocaleTimeString();
-        currentDate.value = now.toLocaleDateString();
     };
 </script>
 
@@ -99,7 +97,7 @@ import moment from 'moment';
         <div class="px-10 mt-6 flex justify-between">
             <h1 class="text-2xl font-bold mr-2">Orders</h1>
             <span class="text-xs font-bold">
-                {{moment(currentDate).format("MMMM DD, YYYY")}} at
+                {{moment().format("MMMM DD, YYYY")}} at
                 <span>{{currentTime}}</span>
             </span>
             <a :href="route('dashboard')" class="font-medium text-sm font-bold text-white px-4 py-2 bg-yellow-500 rounded-md">
