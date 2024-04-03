@@ -12,6 +12,6 @@ class CompletedTransactionApiController extends Controller
     // List of completed transactions
     public function index(): AnonymousResourceCollection
     {
-        return TransactionResource::collection(Transaction::with('orders.product')->status('completed')->get());
+        return TransactionResource::collection(Transaction::with('orders.product')->today()->status('completed')->get());
     }
 }

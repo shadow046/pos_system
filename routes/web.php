@@ -90,6 +90,7 @@ Route::middleware(['auth', 'active', 'device.verified', 'password.updated'])->pr
     });
 
     Route::inertia('/orders', 'Kanban/Index')->name('orders.index');
+    Route::inertia('/orders/display', 'Kanban/Display')->name('orders.show');
 });
 
 require __DIR__.'/auth.php';

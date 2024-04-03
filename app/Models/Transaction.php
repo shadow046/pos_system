@@ -94,4 +94,13 @@ class Transaction extends Model
     {
         return $query->where('status', $status);
     }
+
+    // Scope a query to only include todays transaction.
+    public function scopeToday(Builder $query): Builder
+    {
+        $from = now()->format('Y-m-d').' 00:00:00';
+        $to = now()->format('Y-m-d').' 23:59:59';
+
+        return $query->betweenDate($from, $to);
+    }
 }
