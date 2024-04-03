@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('transactions', function (Blueprint $table) {
-            $table->string('receipt_no')->index()->after('id');
+            $table->string('receipt_no')->nullable()->index()->after('id');
         });
     }
 

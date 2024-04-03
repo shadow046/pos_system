@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('transactions', function (Blueprint $table) {
-            $table->decimal('amount_paid', 20, 2)->index()->after('amount');
+            $table->decimal('amount_paid', 20, 2)->default(0)->index()->after('amount');
         });
     }
 

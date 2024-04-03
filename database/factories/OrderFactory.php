@@ -17,7 +17,8 @@ class OrderFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'quantity' => 4,
+            'price' => 1911.40,
         ];
     }
 }

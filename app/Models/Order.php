@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Order extends Model
 {
     use HasFactory;
-    
     use UsesUuid;
 
     /**
@@ -22,13 +21,11 @@ class Order extends Model
         'transaction_id',
         'product_id',
         'quantity',
-        'price'
+        'price',
     ];
 
     /**
      * Order relationship with product.
-     * 
-     * @return BelongsTo
      */
     public function product(): BelongsTo
     {

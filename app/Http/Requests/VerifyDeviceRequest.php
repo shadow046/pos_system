@@ -23,7 +23,7 @@ class VerifyDeviceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'otp' => ['required', 'numeric', new CheckOtpValidityRule(auth()->user())]
+            'otp' => ['required', 'numeric', new CheckOtpValidityRule(auth()->user())],
         ];
     }
 }

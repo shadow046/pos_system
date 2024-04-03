@@ -14,9 +14,6 @@ class GenerateReceipt
 
     /**
      * Generate receipt.
-     * 
-     * @param Transaction $transaction
-     * @return void
      */
     public function handle(Transaction $transaction): void
     {
@@ -26,17 +23,16 @@ class GenerateReceipt
 
         Receipt::updateOrCreate([
             'transaction_id' => $transaction->id,
-        ],[
+        ], [
             'path' => $path,
-            'file_name' => "{$transaction->receipt_no}.pdf"
+            'file_name' => "{$transaction->receipt_no}.pdf",
         ]);
     }
 
     /**
      * To load pdf file.
-     * 
-     * @param Transaction $transaction
-     * @param Clinic $clinic
+     *
+     * @param  Clinic  $clinic
      */
     protected function getPdf(Transaction $transaction)
     {

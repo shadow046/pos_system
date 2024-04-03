@@ -57,6 +57,22 @@ const showConfigurationsMenu = ref(false);
             </ul>
             <ul>
                 <li class="relative px-6 py-3">
+                    <span v-if="route().current('orders.*')"
+                        class="absolute inset-y-0 left-0 w-1 bg-yellow-400 rounded-tr-lg rounded-br-lg"
+                        aria-hidden="true"
+                    ></span>
+                    <a
+                        class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800"
+                        :class="route().current('orders.*') ? 'text-gray-800' : ''"
+                        :href="route('orders.index')"
+                    >
+                    <svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z"></path>
+                    </svg>
+                        <span class="ml-4">Orders</span>
+                    </a>
+                </li>
+                <li class="relative px-6 py-3">
                 <span v-if="route().current('transactions.*')"
                     class="absolute inset-y-0 left-0 w-1 bg-yellow-400 rounded-tr-lg rounded-br-lg"
                     aria-hidden="true"
@@ -228,7 +244,24 @@ const showConfigurationsMenu = ref(false);
                     </a>
                 </li>
                 </ul>
+
                 <ul>
+                    <li class="relative px-6 py-3">
+                        <span v-if="route().current('orders.*')"
+                            class="absolute inset-y-0 left-0 w-1 bg-yellow-400 rounded-tr-lg rounded-br-lg"
+                            aria-hidden="true"
+                        ></span>
+                        <a
+                            class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800"
+                            :class="route().current('orders.*') ? 'text-gray-800' : ''"
+                            :href="route('orders.index')"
+                        >
+                        <svg data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" class="h-5 w-5" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z"></path>
+                        </svg>
+                            <span class="ml-4">Orders</span>
+                        </a>
+                    </li>
                     <li class="relative px-6 py-3">
                     <span v-if="route().current('transactions.*')"
                         class="absolute inset-y-0 left-0 w-1 bg-yellow-400 rounded-tr-lg rounded-br-lg"
@@ -344,7 +377,7 @@ const showConfigurationsMenu = ref(false);
             </div>
         </TransitionRoot>
 
-        <div class="flex flex-col flex-1 w-full">
+        <div class="flex flex-col flex-1 w-full mx-auto">
             <header class="z-10 py-4 bg-white shadow-md">
                 <div
                 class="container flex items-center justify-between h-full px-6 mx-auto text-yellow-400"

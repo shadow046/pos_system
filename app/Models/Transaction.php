@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Transaction extends Model
 {
     use HasFactory;
-    
     use UsesUuid;
 
     /**
@@ -33,13 +32,11 @@ class Transaction extends Model
         'amount',
         'amount_paid',
         'change',
-        'status'
+        'status',
     ];
 
     /**
      * Transaction relationship with orders.
-     * 
-     * @return HasMany
      */
     public function orders(): HasMany
     {
@@ -48,8 +45,6 @@ class Transaction extends Model
 
     /**
      * Transaction relationship with user.
-     * 
-     * @return BelongsTo
      */
     public function user(): BelongsTo
     {
@@ -58,8 +53,6 @@ class Transaction extends Model
 
     /**
      * Transaction relationship with receipt.
-     * 
-     * @return HasOne
      */
     public function receipt(): HasOne
     {
@@ -94,5 +87,20 @@ class Transaction extends Model
     public function scopeNotVoid(Builder $query): Builder
     {
         return $query->where('status', '!=', 'void');
+    }
+
+    // Scope a query to only include transactions per status.
+    public function scopeStatus(Builder $query, string $status): Builder
+    {
+        return $query->where('status', $status);
+    }
+
+    // Scope a query to only include todays transaction.
+    public function scopeToday(Builder $query): Builder
+    {
+        $from = now()->format('Y-m-d').' 00:00:00';
+        $to = now()->format('Y-m-d').' 23:59:59';
+
+        return $query->betweenDate($from, $to);
     }
 }

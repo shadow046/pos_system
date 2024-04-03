@@ -44,7 +44,8 @@ class AppServiceProvider extends ServiceProvider
             'category' => Category::class,
         ]);
 
-        if (env('APP_ENV') == 'production') {
+        if (env('APP_ENV') == 'production')
+        {
             $url->forceScheme('https');
         }
     }

@@ -12,12 +12,8 @@ class Create
 
     /**
      * Create product.
-     * 
-     * @param ProductRequest $request
-     * 
-     * @return void
      */
-    public function handle(ProductRequest $request) : void
+    public function handle(ProductRequest $request): void
     {
         $product = $this->create($request);
 
@@ -28,33 +24,24 @@ class Create
 
     /**
      * Create product.
-     * 
-     * @param ProductRequest $request
-     * 
-     * @return Product
      */
-    protected function create(ProductRequest $request) : Product
+    protected function create(ProductRequest $request): Product
     {
         return Product::create([
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
             'quantity' => $request->quantity,
-            'status' => $request->quantity > 0 ? 'available' : 'not available'
+            'status' => $request->quantity > 0 ? 'available' : 'not available',
         ]);
     }
 
     /**
      * Upload image.
-     * 
-     * @param ProductRequest $request
-     * @param Product $product
-     * 
-     * @return void
      */
-    protected function upload(ProductRequest $request, Product $product) : void
+    protected function upload(ProductRequest $request, Product $product): void
     {
-        if(filled($request->file('image')))
+        if (filled($request->file('image')))
         {
             $product->update(['image' => $request->file('image')->store(SetDirectory::run($product))]);
         }

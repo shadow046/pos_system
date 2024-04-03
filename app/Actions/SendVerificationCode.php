@@ -13,9 +13,6 @@ class SendVerificationCode
 
     /**
      * Send verification code.
-     * 
-     * @param User $user
-     * @return void
      */
     public function handle(User $user): void
     {
@@ -25,6 +22,6 @@ class SendVerificationCode
             'device_verified_at' => null,
         ]);
 
-        event(new VerifyDeviceEvent($user, Browser::browserFamily().' on '. Browser::platformFamily()));
+        event(new VerifyDeviceEvent($user, Browser::browserFamily().' on '.Browser::platformFamily()));
     }
 }

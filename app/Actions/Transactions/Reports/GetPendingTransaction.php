@@ -13,15 +13,13 @@ class GetPendingTransaction
 
     /**
      * Pending transaction report.
-     * 
-     * @param ReportRequest $request
      */
     public function handle(ReportRequest $request)
     {
         $count_data = [];
         $total = 0;
 
-        foreach($this->setPendingDetails($request) as $key => $summary)
+        foreach ($this->setPendingDetails($request) as $key => $summary)
         {
             $count_data[$key] = $summary->count();
             $total += $summary->sum('amount');
@@ -29,24 +27,24 @@ class GetPendingTransaction
 
         return [
             'data' => $count_data,
-            'total_amount' => $total
+            'total_amount' => $total,
         ];
     }
-    
+
     // Set pending details
     protected function setPendingDetails(ReportRequest $request)
     {
         $data = $this->getPendingTransactionSummary($request);
 
-        foreach(SetDateRange::run($request) as $date)
+        foreach (SetDateRange::run($request) as $date)
         {
-            if(!isset($data[$date]))
+            if (! isset($data[$date]))
             {
                 $data[$date] = collect([]);
             }
         }
-        
-        return $data->keyBy(function($item, $key) {
+
+        return $data->keyBy(function ($item, $key) {
             return Carbon::parse($key)->format('Y-m-d');
         })->sortKeys();
     }
@@ -56,11 +54,11 @@ class GetPendingTransaction
     {
         $startDate = SetDateFrom::run($request);
         $endDate = SetDateTo::run($request);
-        
+
         return Transaction::pending()
             ->betweenDate("{$startDate} 00:00:00", "{$endDate} 23:59:59")
             ->get()
-            ->groupBy(function($date) {
+            ->groupBy(function ($date) {
                 return date('F d, Y', strtotime($date->sold_at));
             });
     }

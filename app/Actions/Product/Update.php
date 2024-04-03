@@ -12,16 +12,11 @@ class Update
 
     /**
      * Create product.
-     * 
-     * @param Product $product
-     * @param ProductRequest $request
-     * 
-     * @return void
      */
-    public function handle(Product $product, ProductRequest $request) : void
+    public function handle(Product $product, ProductRequest $request): void
     {
         $this->update($product, $request);
-        
+
         $this->reupload($request, $product);
 
         $product->categories()->sync(collect($request->categories)->pluck('id'));
@@ -29,34 +24,24 @@ class Update
 
     /**
      * Create product.
-     * 
-     * @param Product $product
-     * @param ProductRequest $request
-     * 
-     * @return void
      */
-    protected function update(Product $product, ProductRequest $request) : void
+    protected function update(Product $product, ProductRequest $request): void
     {
         $product->update([
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
             'quantity' => $request->quantity,
-            'status' => $request->quantity > 0 ? 'available' : 'not available'
+            'status' => $request->quantity > 0 ? 'available' : 'not available',
         ]);
     }
 
     /**
      * Update image.
-     * 
-     * @param ProductRequest $request
-     * @param Product $product
-     * 
-     * @return void
      */
-    protected function reupload(ProductRequest $request, Product $product) : void
+    protected function reupload(ProductRequest $request, Product $product): void
     {
-        if(filled($request->file('image')))
+        if (filled($request->file('image')))
         {
             RemovePhoto::run($product);
 

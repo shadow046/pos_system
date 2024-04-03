@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Profile extends Model
 {
     use HasFactory;
-    
     use UsesUuid;
 
     /**
@@ -23,27 +22,23 @@ class Profile extends Model
         'user_id',
         'first_name',
         'middle_name',
-        'last_name'
+        'last_name',
     ];
 
     /**
      * Profile relationship with users.
-     *
-     * @return BelongsTo
      */
-    public function user() : BelongsTo
+    public function user(): BelongsTo
     {
         return $this->hasOne(User::class);
     }
 
     /**
      * Interact with the profile's full name.
-     *
-     * @return Attribute
      */
-    public function fullName() : Attribute
+    public function fullName(): Attribute
     {
-        if(blank($this->middle_name))
+        if (blank($this->middle_name))
         {
             return Attribute::make(
                 get: fn ($value, $attributes) => "{$attributes['first_name']} {$attributes['last_name']}",
