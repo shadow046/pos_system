@@ -5,6 +5,7 @@ use App\Models\Product;
 use App\Models\Role;
 use App\Models\Transaction;
 use App\Models\User;
+use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\Facades\Storage;
 
 use function Pest\Laravel\actingAs;
@@ -31,7 +32,7 @@ it('validates required fields', function ($key, $value) {
 ]);
 
 it('can create transaction', function () {
-    Storage::fake();
+    Queue::fake();
     $user = User::factory()->create();
 
     $product = Product::factory()->create(['quantity' => 10, 'status' => 'available']);
@@ -56,6 +57,7 @@ it('can create transaction', function () {
         'total_order' => 3,
     ];
 
+    Storage::fake();
     actingAs($user)
         ->post(route('transactions.store'), $data)
         ->assertRedirect('/');
@@ -66,7 +68,7 @@ it('can create transaction', function () {
 });
 
 it('can update transaction status to void, and it will remove generated receipt', function () {
-    Storage::fake();
+    Queue::fake();
     Role::factory()->admin()->create();
     $user = User::factory()->admin();
 
@@ -92,6 +94,7 @@ it('can update transaction status to void, and it will remove generated receipt'
         'total_order' => 3,
     ];
 
+    Storage::fake();
     actingAs($user)
         ->post(route('transactions.store'), $data)
         ->assertRedirect('/');
