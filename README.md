@@ -15,6 +15,7 @@ This project will be used for taking customer's order. It was built with Laravel
  - Automated generation of receipt
  - Generating reports
  - Activity logs per user
+ - Direct printing of receipt
  - Configurations:
    - Category
    - Products
