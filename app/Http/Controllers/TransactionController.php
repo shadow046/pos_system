@@ -7,6 +7,7 @@ use App\Actions\Transactions\CreateTransaction;
 use App\Actions\Transactions\GenerateReceipt;
 use App\Http\Requests\Store\TransactionRequest;
 use App\Http\Requests\Update\TransactionRequest as UpdateTransactionRequest;
+use App\Jobs\PrintReceiptJob;
 use App\Models\Transaction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -38,6 +39,8 @@ class TransactionController extends Controller
         $transaction = CreateTransaction::run($request);
 
         GenerateReceipt::run($transaction);
+
+        PrintReceiptJob::dispatch($transaction);
 
         return back();
     }
