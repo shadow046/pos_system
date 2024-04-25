@@ -13,7 +13,9 @@
         "laravel/framework": "^11.1",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.7",
+        "php-http/message-factory": "^1.1",
         "rawilk/laravel-printing": "^3.0",
+        "smalot/cups-ipp": "^0.5.0",
         "spatie/laravel-permission": "^6.4",
         "tightenco/ziggy": "^1.0"
     },
