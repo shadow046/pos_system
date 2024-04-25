@@ -28,7 +28,6 @@ class PrintReceiptJob implements ShouldQueue
     public function handle(): void
     {
         $printers = Printing::printers();
-        dd(env('APP_URL').$this->transaction->receipt->file);
         if (isset($printers[0]))
         {
             Printing::newPrintTask()

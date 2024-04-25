@@ -13,7 +13,6 @@ class StorageController extends Controller
     {
         $filePath = storage_path('app/' . $path);
 
-        // dd($path);
         if (!Storage::exists($path)) {
             abort(404);
         }
