@@ -10,6 +10,7 @@ use App\Http\Controllers\ResendVerificationCodeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StorageController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -28,6 +29,8 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return redirect('/login');
 })->name('main');
+
+Route::get('/storage/{path}', [StorageController ::class, 'show'])->where('path', '.*');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'active', 'device.verified', 'verified', 'password.updated'])->name('dashboard');
 
