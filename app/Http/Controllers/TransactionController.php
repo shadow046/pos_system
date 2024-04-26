@@ -40,7 +40,7 @@ class TransactionController extends Controller
 
         GenerateReceipt::run($transaction);
 
-        PrintReceiptJob::dispatch($transaction);
+        dd(PrintReceiptJob::dispatch($transaction));
 
         return back();
     }
