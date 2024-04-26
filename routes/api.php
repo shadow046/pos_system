@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
+// Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     Route::get('/products', [ProductController::class, 'index'])->name('api.products.get');
     Route::get('/reports', [ReportController::class, 'index'])->name('api.reports.get');
 
@@ -38,4 +38,4 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
         Route::get('/void', [VoidTransactionApiController::class, 'index'])->name('api.transactions.void');
         Route::put('/change-status/{transaction:uuid}', [ChangeTransactionStatusApiController::class, 'update'])->name('api.transactions.change-status');
     });
-});
+// });

@@ -19,12 +19,14 @@ class DeviceIsNotVerified
     // Check if ip address is not the same on current ip.
     protected function isNewIpAddress(): bool
     {
+        return false;
         return GetIpAddress::run() != auth()->user()->current_ip_address;
     }
 
     // Check if device was not verified.
     protected function isDeviceNotVerified()
     {
+        return true;
         return GetIpAddress::run() == auth()->user()->current_ip_address && blank(auth()->user()->device_verified_at);
     }
 }

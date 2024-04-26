@@ -16,6 +16,7 @@ class VerifiedDeviceMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        return $next($request);
         return DeviceIsNotVerified::run() ? redirect(route('device.verification')) : $next($request);
     }
 }

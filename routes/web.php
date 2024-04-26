@@ -31,8 +31,9 @@ Route::get('/', function () {
 })->name('main');
 
 Route::get('/storage/{path}', [StorageController ::class, 'show'])->where('path', '.*');
+Route::get('/printcount', [StorageController ::class, 'printCount']);
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'active', 'device.verified', 'verified', 'password.updated'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'active', 'password.updated'])->name('dashboard');
 
 Route::middleware(['auth', 'active'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -47,7 +48,7 @@ Route::middleware(['auth', 'active'])->group(function () {
     Route::post('/resend/otp', [ResendVerificationCodeController::class, 'store'])->name('resend.otp');
 });
 
-Route::middleware(['auth', 'active', 'device.verified', 'password.updated'])->prefix('configurations')->group(function () {
+Route::middleware(['auth', 'active','password.updated'])->prefix('configurations')->group(function () {
     Route::middleware('admin')->group(function () {
         Route::controller(RoleController::class)->prefix('roles')->group(function () {
             Route::get('/', 'index')->name('roles.index');
