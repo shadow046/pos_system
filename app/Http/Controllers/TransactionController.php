@@ -42,27 +42,16 @@ class TransactionController extends Controller
         $path = env('APP_URL').$transaction->receipt->file;
         // dd($path);
         // exec("lp -d Brother_DCP_7040_192_168_0_9 $path");
-        exec('wmic printer where default="TRUE" get name', $output, $returnCode);
-        if ($returnCode === 0 && count($output) >= 2) {
-            // Extract the default printer name from the second line of output
-            $defaultPrinter = trim($output[1]);
+        // exec('wmic printer where default="TRUE" get name', $output, $returnCode);
+        // print /D:"\\192.168.0.9\Brother-DCP-7040" "D:\xampp\htdocs\pos_system\storage\app\Transactions\96\00000096.pdf"
+        $command = 'print /D:"\\\\192.168.0.9\\Brother-DCP-7040" '.$path;
+        exec($command, $output, $returnCode);
 
-            // Execute the print command to print the file using the default printer
-            exec("print /D:\"$defaultPrinter\" \"$path\"", $printOutput, $printReturnCode);
-
-            // Check if the print command executed successfully
-            if ($printReturnCode === 0) {
-                return back();
-                // return response()->json(['message' => 'File sent to printer successfully']);
-            } else {
-                dd('wala');
-                return response()->json(['error' => 'Failed to send file to printer']);
-            }
+        if ($returnCode === 0) {
+            return back();
         } else {
             dd('palpak');
-            return response()->json(['error' => 'Failed to get default printer information']);
         }
-        // return back();
     }
 
     // Generate transaction receipt.
