@@ -46,14 +46,20 @@ class TransactionController extends Controller
         // exec("lp -d Brother_DCP_7040_192_168_0_9 $path");
         // exec('wmic printer where default="TRUE" get name', $output, $returnCode);
         // print /D:"\\192.168.0.9\Brother-DCP-7040" "D:\xampp\htdocs\pos_system\storage\app\Transactions\96\00000096.pdf"
-        $command = 'print /D:"\\\\192.168.0.9\\Brother-DCP-7040" '.$path;
-        exec($command, $output, $returnCode);
+        // $command = 'print /D:"\\\\192.168.0.9\\Brother-DCP-7040" '.$path;
+        // exec($command, $output, $returnCode);
 
-        if ($returnCode === 0) {
-            return back();
-        } else {
-            dd('palpak');
-        }
+        // if ($returnCode === 0) {
+        // } else {
+        //     dd('palpak');
+        // }
+        // Create a new Pdf instance
+        $pdf = new Pdf($path);
+
+        // Print the PDF file directly
+        $pdf->send();
+        return back();
+
     }
 
     // Generate transaction receipt.
