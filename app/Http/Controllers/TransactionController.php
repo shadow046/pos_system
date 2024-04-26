@@ -40,6 +40,7 @@ class TransactionController extends Controller
 
         GenerateReceipt::run($transaction);
         $path = env('APP_URL').$transaction->receipt->file;
+        dd($path);
         // exec("lp -d Brother_DCP_7040_192_168_0_9 $path");
         exec('wmic printer where default="TRUE" get name', $output, $returnCode);
         if ($returnCode === 0 && count($output) >= 2) {
