@@ -402,7 +402,7 @@ const showConfigurationsMenu = ref(false);
                     </svg>
                 </button>
                 <!-- Search input -->
-                <div class="flex justify-center flex-1 lg:mr-32">
+                <!-- <div class="flex justify-center flex-1 lg:mr-32">
                     <div
                     class="relative w-full max-w-xl mr-6 focus-within:text-yellow-400"
                     >
@@ -427,7 +427,7 @@ const showConfigurationsMenu = ref(false);
                         aria-label="Search"
                     />
                     </div>
-                </div>
+                </div> -->
                 <Dropdown align="right" width="48">
                     <template #trigger>
                         <span class="inline-flex rounded-md">
