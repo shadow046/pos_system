@@ -46,7 +46,9 @@ RUN apt-get update \
 
 # RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.3
 COPY . .
-# RUN composer install
+RUN composer install
+RUN npm run build
+
 #RUN php artisan key:generate
 # RUN chmod 777 -R .
 EXPOSE 8001

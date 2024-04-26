@@ -15,7 +15,7 @@ jobs:
     - name: Publish to Registry (Latest Release)
       uses: elgohr/Publish-Docker-Github-Action@v4
       with:
-        name: shadow046/online_parking/online_parking:latest
+        name: shadow046/pos_system/pos_system:latest
         username: ${{ github.actor }}
         password: ${{ secrets.GITPASS }}
         registry: ghcr.io
@@ -23,7 +23,7 @@ jobs:
     - name: Publish to Registry (Version Release)
       uses: elgohr/Publish-Docker-Github-Action@v4
       with:
-        name: shadow046/online_parking/online_parking
+        name: shadow046/pos_system/pos_system
         username: ${{ github.actor }}
         password: ${{ secrets.GITPASS }}
         registry: ghcr.io
