@@ -54,9 +54,11 @@ class TransactionController extends Controller
                 return back();
                 // return response()->json(['message' => 'File sent to printer successfully']);
             } else {
+                dd('wala');
                 return response()->json(['error' => 'Failed to send file to printer']);
             }
         } else {
+            dd('palpak');
             return response()->json(['error' => 'Failed to get default printer information']);
         }
         // return back();
