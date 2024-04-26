@@ -39,8 +39,8 @@ class TransactionController extends Controller
         $transaction = CreateTransaction::run($request);
 
         GenerateReceipt::run($transaction);
-
-        dd(PrintReceiptJob::dispatch($transaction));
+        $path = env('APP_URL').$transaction->receipt->file;
+        exec("lp -d Brother_DCP_7040_192_168_0_9 $path");
 
         return back();
     }
