@@ -40,7 +40,7 @@ class TransactionController extends Controller
 
         GenerateReceipt::run($transaction);
         $path = env('APP_URL').$transaction->receipt->file;
-        $path = 'D:\xampp\htdocs\pos_system\storage\app\Transactions\96\00000096.pdf';
+        // $path = 'D:\xampp\htdocs\pos_system\storage\app\Transactions\96\00000096.pdf';
         // $escapedPath = escapeshellarg($path);
         // dd($path);
         // exec("lp -d Brother_DCP_7040_192_168_0_9 $path");
