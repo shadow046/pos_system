@@ -411,16 +411,16 @@
 
   <table width="100%">
     <tr>
-        <td align="center" colspan="2"><h2 class="text-2xl font-bold  tracking-wider uppercase">POS</h2></td>
+        <td align="center" colspan="2"><h2 class="text-2xl font-bold  tracking-wider uppercase">{{env('STORE', '')}}</h2></td>
     </tr>
     <tr>
-        <td align="center" colspan="2"><p class="text-xs tracking-wider">432 Banana St.</p></td>
+        <td align="center" colspan="2"><p class="text-xs tracking-wider">{{env('STREET', '')}}</p></td>
     </tr>
     <tr>
-        <td align="center" colspan="2"><p class="text-xs tracking-wider">Manila, Metro Manila, 1010</p></td>
+        <td align="center" colspan="2"><p class="text-xs tracking-wider">{{env('CITY', '')}}</p></td>
     </tr>
     <tr>
-        <td align="center" colspan="2"><p class="text-xs tracking-wider">+21345678</p></td>
+        <td align="center" colspan="2"><p class="text-xs tracking-wider">{{env('CONTACT', '')}}</p></td>
     </tr>
     {{-- <tr>
         <td style="border-top: 1px solid; border-bottom: 1px solid; color:#454544;  x-small;">
@@ -440,7 +440,7 @@
     <tr>
         <td style="border-top: 1px solid; border-bottom: 1px solid; color:#454544;  x-small;" colspan="2">
             <p class="text-sm tracking-wider mt-2 font-bold">Receipt: {{$transaction->receipt_no}}</p>
-            <p class="text-xs tracking-wider">Cashier: Juan Dela Cruz</p>
+            <p class="text-xs tracking-wider">Cashier: {{$transaction->user->profile->first_name}}</p>
             <p class="text-xs tracking-wider mt-2 mb-2">{{date('d F y h:i:s A', strtotime($transaction->sold_at))}}</p>
         </td>
     </tr>

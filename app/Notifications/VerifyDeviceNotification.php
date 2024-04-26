@@ -31,7 +31,7 @@ class VerifyDeviceNotification extends Notification implements ShouldQueue
         $this->user = $event->user;
         $this->device = $event->device;
 
-        app(Dispatcher::class)->sendNow($event->user, $this);
+        // app(Dispatcher::class)->sendNow($event->user, $this);
     }
 
     /**

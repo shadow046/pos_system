@@ -47,7 +47,7 @@ class CreateTransaction
             'amount' => $request->amount,
             'amount_paid' => $request->cash,
             'change' => $request->change,
-            'status' => 'pending',
+            'status' => 'completed',
         ]);
     }
 

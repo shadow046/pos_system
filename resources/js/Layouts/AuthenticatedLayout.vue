@@ -56,7 +56,7 @@ const showConfigurationsMenu = ref(false);
                 </li>
             </ul>
             <ul>
-                <li class="relative px-6 py-3">
+                <!-- <li class="relative px-6 py-3">
                     <span v-if="route().current('orders.*')"
                         class="absolute inset-y-0 left-0 w-1 bg-yellow-400 rounded-tr-lg rounded-br-lg"
                         aria-hidden="true"
@@ -71,7 +71,7 @@ const showConfigurationsMenu = ref(false);
                     </svg>
                         <span class="ml-4">Orders</span>
                     </a>
-                </li>
+                </li> -->
                 <li class="relative px-6 py-3">
                 <span v-if="route().current('transactions.*')"
                     class="absolute inset-y-0 left-0 w-1 bg-yellow-400 rounded-tr-lg rounded-br-lg"
@@ -246,7 +246,7 @@ const showConfigurationsMenu = ref(false);
                 </ul>
 
                 <ul>
-                    <li class="relative px-6 py-3">
+                    <!-- <li class="relative px-6 py-3">
                         <span v-if="route().current('orders.*')"
                             class="absolute inset-y-0 left-0 w-1 bg-yellow-400 rounded-tr-lg rounded-br-lg"
                             aria-hidden="true"
@@ -261,7 +261,7 @@ const showConfigurationsMenu = ref(false);
                         </svg>
                             <span class="ml-4">Orders</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="relative px-6 py-3">
                     <span v-if="route().current('transactions.*')"
                         class="absolute inset-y-0 left-0 w-1 bg-yellow-400 rounded-tr-lg rounded-br-lg"
