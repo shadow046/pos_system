@@ -1,53 +1,30 @@
-name: Build
+name: Publish to docker
 
-on:
-  push:
-    branches:
-      - master
-      - develop
-  pull_request:
-    branches:
-      - master
-      - develop
+on:    
+  release:
+    types: [published]
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: "8.2"
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
-          coverage: none
+    - name: Publish to Registry (Latest Release)
+      uses: elgohr/Publish-Docker-Github-Action@v4
+      with:
+        name: shadow046/pos_system/pos_system:latest
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITPASS }}
+        registry: ghcr.io
 
-      - name: Copy Environment
-        run: cp .env.example .env
-
-      - name: Install Dependencies
-        run: |
-          composer install -n --prefer-dist
-          composer update
-
-      - name: Clear Config & Cache
-        run: |
-          php artisan config:clear
-          php artisan cache:clear
-
-      - name: Compile Front-End
-        run: |
-          npm install
-          npm run build
-
-      - name: Regenerate Key
-        run: php artisan key:generate
-
-      - name: Run Tests
-        run: ./vendor/bin/pest --parallel
-
-      - name: Run Pint
-        run: ./vendor/bin/pint --test
+    - name: Publish to Registry (Version Release)
+      uses: elgohr/Publish-Docker-Github-Action@v4
+      with:
+        name: shadow046/pos_system/pos_system
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITPASS }}
+        registry: ghcr.io
+        tag_names: true
